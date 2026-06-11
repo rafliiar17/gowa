@@ -19,9 +19,9 @@ type gowaFS struct {
 
 func (g gowaFS) Open(name string) (fs.File, error) {
 	cleaned := name
-	if strings.HasPrefix(name, "gowa/src/views/") {
-		cleaned = strings.TrimPrefix(name, "gowa/src/views/")
-	} else if name == "gowa" || name == "gowa/src" || name == "gowa/src/views" {
+	if strings.HasPrefix(name, "views/") {
+		cleaned = strings.TrimPrefix(name, "views/")
+	} else if name == "views" {
 		cleaned = "."
 	}
 	return g.underlying.Open(cleaned)
@@ -29,9 +29,9 @@ func (g gowaFS) Open(name string) (fs.File, error) {
 
 func (g gowaFS) ReadDir(name string) ([]fs.DirEntry, error) {
 	cleaned := name
-	if strings.HasPrefix(name, "gowa/src/views/") {
-		cleaned = strings.TrimPrefix(name, "gowa/src/views/")
-	} else if name == "gowa" || name == "gowa/src" || name == "gowa/src/views" {
+	if strings.HasPrefix(name, "views/") {
+		cleaned = strings.TrimPrefix(name, "views/")
+	} else if name == "views" {
 		cleaned = "."
 	}
 	if rdf, ok := g.underlying.(fs.ReadDirFS); ok {
