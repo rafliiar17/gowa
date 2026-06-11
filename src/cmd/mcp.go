@@ -74,3 +74,12 @@ func mcpServer(_ *cobra.Command, _ []string) {
 		logrus.Fatalf("Failed to start SSE server: %v", err)
 	}
 }
+
+// RunMcpServer starts GOWA's MCP server programmatically.
+func RunMcpServer() {
+	if appUsecase == nil {
+		initEnvConfig()
+		initApp()
+	}
+	mcpServer(nil, nil)
+}
