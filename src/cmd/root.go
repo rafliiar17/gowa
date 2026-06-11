@@ -3,8 +3,8 @@ package cmd
 import (
 	"context"
 	"database/sql"
-	"embed"
 	"fmt"
+	"io/fs"
 	"os"
 	"strings"
 	"time"
@@ -34,8 +34,8 @@ import (
 )
 
 var (
-	EmbedIndex embed.FS
-	EmbedViews embed.FS
+	EmbedIndex fs.FS
+	EmbedViews fs.FS
 
 	// Whatsapp
 	whatsappCli *whatsmeow.Client
@@ -581,7 +581,7 @@ func initApp() {
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-func Execute(embedIndex embed.FS, embedViews embed.FS) {
+func Execute(embedIndex fs.FS, embedViews fs.FS) {
 	EmbedIndex = embedIndex
 	EmbedViews = embedViews
 	if err := rootCmd.Execute(); err != nil {
